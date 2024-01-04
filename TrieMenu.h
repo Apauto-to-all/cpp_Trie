@@ -260,7 +260,7 @@ void insertTrie(Trie& T) {
         cout << "注意：" << endl;
         cout << "1.txt、csv文件，第一列应为单词，第二列为对应的中文翻译，两列之间请使用逗号进行分割。" << endl;
         cout << "2.注意txt、csv文件编码" << endl;
-        cout << "3.单词格式支持：只有大小写字母" << endl;
+        cout << "3.单词格式支持：大小写字母和一些常用符号" << endl;
         cout << "4.如果当前字典树已经储存了同样的单词，默认覆盖单词的翻译" << endl;
         cout << "--------------------------------------------------------" << endl;
         if (!exists(dataDir)) {
@@ -395,7 +395,7 @@ void changeWord(Trie& T) {
             system("cls");
             cin.clear();
             cin.ignore();
-            cout << "输入需要添加改翻译的单词" << endl;
+            cout << "输入需要添加翻译的单词" << endl;
             cout << "---------------------" << endl;
             string word, meaning;
             cout << "输入单词：";
