@@ -1,7 +1,5 @@
 #include"TrieDef.h"
 
-
-
 // char转化为int
 int charToint(char ch) {
     if ('A' <= ch && ch <= 'Z') {
@@ -10,6 +8,9 @@ int charToint(char ch) {
     else if ('a' <= ch && ch <= 'z') {
         return ch - 'a' + 26;
     }
+    else if (ch == '.') return 52 - 1 + 1;
+    else if (ch == '-') return 52 - 1 + 2;
+    else if(ch == '\'') return 52 - 1 + 3;
     else {
         return -1;
     }
@@ -56,14 +57,31 @@ bool deleteWord(Trie& T, string word) {
         int index = charToint(ch);
         if (p->abc[index] == nullptr) {
             // 单词不存在
+            cout << "单词不存在" << endl;
             return false;
         }
         p = p->abc[index];
     }
-    if (p->data.zh.empty()) return false; //单词为空，也不存在
+    if (p->data.zh.empty()) {
+        cout << "单词不存在" << endl;
+        return false; //单词为空，也不存在
+    }
     cout << word << "：" << p->data.zh << endl;
-    p->data.zh = "";
-    return true;
+    cout << "是否删除该单词（y or n）：";
+    string c;
+    getline(cin, c);
+    while (c != "y" && c != "Y" && c != "n" && c != "N" && !cin.fail()) {
+        cout << "输入有误，请重新输入（y or n）：";
+        getline(cin, c);
+    }
+    if (c == "y" || c == "Y") {
+        p->data.zh = "";
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 // 添加单词的翻译
@@ -124,7 +142,7 @@ void deepSearchWord(Trie T, string Prefix) {
         }
     }
     // 继续深度优先搜索
-    for (int i = 0; i < 52; i++) {
+    for (int i = 0; i < cn; i++) {
         if (T->abc[i] != nullptr) {
             deepSearchWord(T->abc[i], Prefix + T->abc[i]->data.c);
         }
@@ -194,7 +212,7 @@ void saveTrie(Trie T, ofstream& out, string word = "") {
         out << word << "," << T->data.zh << "\n";
     }
     // 继续深度优先搜索
-    for (int i = 0; i < 52; i++) {
+    for (int i = 0; i < cn; i++) {
         if (T->abc[i] != nullptr) {
             saveTrie(T->abc[i], out, word + T->abc[i]->data.c);
         }

@@ -2,6 +2,7 @@
 
 void ShowMenu() {
     cout << "========= 字典树，前缀查找单词 =========" << endl;
+    cout << "            （李腾飞制作）             " << endl;
     cout << "当前选择字典树：" << trieN << endl;
     cout << "1. 更换字典树" << endl;
     cout << "---------------------" << endl;
@@ -14,11 +15,6 @@ void ShowMenu() {
     cout << "请输入你的选择：";
 }
 
-void ExitEnter() {
-    cout << "-------------------------------" << endl;
-    system("pause");
-    system("cls");
-}
 
 int main()
 {

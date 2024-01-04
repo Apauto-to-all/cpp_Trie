@@ -334,6 +334,12 @@ void insertTrie(Trie& T) {
 }
 
 
+
+void ExitEnter() {
+    cout << "-------------------------------" << endl;
+    system("pause");
+    system("cls");
+}
 void Show3() {
     cout << "========= 修改单词及其翻译 =========" << endl;
     cout << "1. 修改单词翻译" << endl;
@@ -344,87 +350,92 @@ void Show3() {
 }
 // 修改单词及其翻译
 void changeWord(Trie& T) {
-    system("cls");
-    Show3();
     int choice;
-    cin >> choice;
-    while (choice < 0 || choice > 3 || cin.fail())
-    {
+    do {
         system("cls");
-        cin.clear();
-        cin.ignore();
         Show3();
         cin >> choice;
-    }
-    switch (choice) {
-    case 1: {
-        system("cls");
-        cin.clear();
-        cin.ignore();
-        cout << "输入需要修改翻译的单词" << endl;
-        cout << "---------------------" << endl;
-        string word, meaning;
-        cout << "输入单词：";
-        getline(cin, word);
-        if (!isIn(T, word)) {
-            cout << "查找到该单词不存在，是否继续？如果继续，则插入新单词+翻译" << endl;
-            cout << "输入y继续，输入其他退出：";
-            string c;
-            getline(cin, c);
-            if (c != "y") {
-                cout << "已经退出" << endl;
-                break;
-            }
+        while (choice < 0 || choice > 3 || cin.fail())
+        {
+            system("cls");
+            cin.clear();
+            cin.ignore();
+            Show3();
+            cin >> choice;
         }
-        cout << "---------------------" << endl;
-        cout << "输入单词翻译：";
-        getline(cin, meaning);
-        if (insert(T, word, meaning)) cout << "成功" << endl;
-        else cout << "失败" << endl;
-        break;
-    }
-    case 2: {
-        system("cls");
-        cin.clear();
-        cin.ignore();
-        cout << "输入需要添加改翻译的单词" << endl;
-        cout << "---------------------" << endl;
-        string word, meaning;
-        cout << "输入单词：";
-        getline(cin, word);
-        if (!isIn(T, word)) {
-            cout << "查找到该单词不存在，是否继续？如果继续，则插入新单词+翻译" << endl;
-            cout << "输入y继续，直接回车退出：";
-            string c;
-            getline(cin, c);
-            if (c != "y") {
-                cout << "已经退出" << endl;
-                break;
+        switch (choice) {
+        case 1: {
+            system("cls");
+            cin.clear();
+            cin.ignore();
+            cout << "输入需要修改翻译的单词" << endl;
+            cout << "---------------------" << endl;
+            string word, meaning;
+            cout << "输入单词：";
+            getline(cin, word);
+            if (!isIn(T, word)) {
+                cout << "查找到该单词不存在，是否继续？如果继续，则插入新单词+翻译" << endl;
+                cout << "输入y继续，输入其他退出：";
+                string c;
+                getline(cin, c);
+                if (c != "y") {
+                    cout << "已经退出" << endl;
+                    break;
+                }
             }
+            cout << "---------------------" << endl;
+            cout << "输入单词翻译：";
+            getline(cin, meaning);
+            if (insert(T, word, meaning)) cout << "成功" << endl;
+            else cout << "失败" << endl;
+            ExitEnter();
+            break;
         }
-        cout << "---------------------" << endl;
-        cout << "输入单词翻译：";
-        getline(cin, meaning);
-        if (addZh(T, word, meaning)) cout << "成功" << endl;
-        else cout << "失败" << endl;
-        break;
-    }
-    case 3: {
-        system("cls");
-        cin.clear();
-        cin.ignore();
-        cout << "输入需要删除的单词" << endl;
-        cout << "---------------------" << endl;
-        string word;
-        cout << "输入单词：";
-        getline(cin, word);
-        if (deleteWord(T, word)) cout << "删除成功" << endl;
-        else cout << "查无此词，无需删除" << endl;
-        break;
-    }
-    case 0: {
-        cout << "已取消操作" << endl;
-        break;
-    }
-    }
+        case 2: {
+            system("cls");
+            cin.clear();
+            cin.ignore();
+            cout << "输入需要添加改翻译的单词" << endl;
+            cout << "---------------------" << endl;
+            string word, meaning;
+            cout << "输入单词：";
+            getline(cin, word);
+            if (!isIn(T, word)) {
+                cout << "查找到该单词不存在，是否继续？如果继续，则插入新单词+翻译" << endl;
+                cout << "输入y继续，直接回车退出：";
+                string c;
+                getline(cin, c);
+                if (c != "y") {
+                    cout << "已经退出" << endl;
+                    break;
+                }
+            }
+            cout << "---------------------" << endl;
+            cout << "输入单词翻译：";
+            getline(cin, meaning);
+            if (addZh(T, word, meaning)) cout << "成功" << endl;
+            else cout << "失败" << endl;
+            ExitEnter();
+            break;
+        }
+        case 3: {
+            system("cls");
+            cin.clear();
+            cin.ignore();
+            cout << "输入需要删除的单词" << endl;
+            cout << "---------------------" << endl;
+            string word;
+            cout << "输入单词：";
+            getline(cin, word);
+            if (deleteWord(T, word)) cout << "删除成功" << endl;
+            else cout << "已取消" << endl;
+            ExitEnter();
+            break;
+        }
+        case 0: {
+            cout << "已取消操作" << endl;
+            break;
+        }
+        }
+    } while (choice != 0);
 }
